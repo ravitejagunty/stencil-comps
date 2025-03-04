@@ -6,22 +6,21 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface AppButton {
+        "label": string;
+        "variant": 'primary' | 'secondary';
+    }
     interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+        "name": string;
     }
 }
 declare global {
+    interface HTMLAppButtonElement extends Components.AppButton, HTMLStencilElement {
+    }
+    var HTMLAppButtonElement: {
+        prototype: HTMLAppButtonElement;
+        new (): HTMLAppButtonElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -29,25 +28,20 @@ declare global {
         new (): HTMLMyComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "app-button": HTMLAppButtonElement;
         "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface AppButton {
+        "label"?: string;
+        "variant"?: 'primary' | 'secondary';
+    }
     interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+        "name"?: string;
     }
     interface IntrinsicElements {
+        "app-button": AppButton;
         "my-component": MyComponent;
     }
 }
@@ -55,6 +49,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "app-button": LocalJSX.AppButton & JSXBase.HTMLAttributes<HTMLAppButtonElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }

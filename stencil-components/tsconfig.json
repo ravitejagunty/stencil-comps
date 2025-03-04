@@ -13,9 +13,8 @@
     "target": "es2017",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "jsx": "react",
-    "jsxFactory": "h",
-    "jsxFragmentFactory": "h.Fragment"
+    "jsx": "react-jsx",
+    "types": ["@stencil/core","jest"]
   },
   "include": [
     "src"
